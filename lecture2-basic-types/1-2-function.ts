@@ -27,4 +27,37 @@
       resolve(100);
     });
   }
+
+  // JavaScript => TypeScript
+  // Optional parameter
+  function printName(firstName: string, lastName: string) {
+    console.log(firstName);
+    console.log(lastName);
+  }
+
+  printName("Steve", "Jobs");
+  printName("Ellie"); // => 정해진 인자 갯수, 정해진 타입대로 인자를 넣지 않으면 에러
+
+  // 두번째 인자 lastName 은 option
+  function printName2(firstName: string, lastName?: string) {
+    console.log(firstName);
+    console.log(lastName);
+  }
+  // 두번째 인자를 lastName: string | undefined) 로 할 경우에는
+  // printName('Ellie', undefined) 와 같이 명시되지 않은 인자는 반드시 undefined 명시해야..
+  // 따라서 optional parameter 를 사용할 때는 ? 를 사용
+
+  //default parameter
+  function printMessage(message: string = "default message") {
+    console.log(message);
+  }
+  printMessage();
+
+  // Rest parameter
+  function addNumbers(...numbers: number[]) {
+    return numbers.reduce((a, b) => a + b);
+  }
+  console.log(addNumbers(1, 2)); // 3
+  console.log(addNumbers(1, 2, 3, 4)); // 10
+  console.log(addNumbers(1, 2, 3, 4, 5, 6)); // 15
 }
