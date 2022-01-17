@@ -7,6 +7,7 @@
     console.log(direction);
   }
   move("down");
+  // => union 타입은 선택지를 만들 때 사용, 반드시 이 중에 하나를 할당해야한다.
 
   type TileSize = 8 | 16 | 32;
   const tile: TileSize = 16;
