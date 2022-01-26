@@ -49,4 +49,33 @@
   // maker.coffeeBeans = -33;  //invalid
   maker.fillCoffeeBeans(20);
   console.log(maker);
+
+  class User {
+    get fullName(): string {
+      return `${this.firstName} ${this.lastName}`;
+    }
+
+    private internalAge = 4;
+    get age(): number {
+      return this.internalAge;
+    }
+
+    set age(num: number) {
+      // 전달된 숫자에 대한 유효성 검사도 할 수 있다.
+      if (num < 0) {
+      }
+      this.internalAge = num;
+    }
+
+    constructor(private firstName: string, private lastName: string) {}
+  }
+
+  const user = new User('Steve', 'Jobs');
+  user.age = 6;
+  // => setter 가 호출되면서 내부적으로는 internalAge라는 멤버변수를 전달된 6으로 업데이트 한다.
 }
+
+// private : 외부의 그 어떤 것이라도 private 키워드가 붙은 내부 데이터나 함수에 접근할 수 없다.
+// protected : 같은 클래스를 상속한 인스턴스에서만 접근이 가능하고 외부에서는 접근이 불가능하다.
+
+// getter와 setter은 일반 변수처럼 사용이 가능하지만 어떤 계산을 해야할 때 유용하게 사용할 수 있다.
