@@ -4,7 +4,11 @@
     hasMilk: boolean;
   };
 
-  class CoffeeMaker {
+  interface CoffeeMaker {
+    makeCoffee(shots: number): CoffeeCup;
+  }
+
+  class CoffeeMachine implements CoffeeMaker {
     private static BEANS_GRAMM_PER_SHOT: number = 7;
     private coffeeBeans: number = 0; // instance (object) level
 
@@ -13,7 +17,7 @@
     }
 
     static makeMachine(coffeeBeans: number): CoffeeMaker {
-      return new CoffeeMaker(coffeeBeans);
+      return new CoffeeMachine(coffeeBeans);
     }
 
     fillCoffeeBeans(beans: number) {
@@ -25,10 +29,10 @@
 
     private grindBeans(shots: number) {
       console.log(`grinding beans for ${shots}`);
-      if (this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT) {
+      if (this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT) {
         throw new Error('Not enough coffee beans!');
       }
-      this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT;
+      this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT;
     }
 
     private preheat(): void {
@@ -51,7 +55,7 @@
     }
   }
 
-  const maker = CoffeeMaker.makeMachine(32);
-  maker.fillCoffeeBeans(32);
+  const maker: CoffeeMaker = CoffeeMachine.makeMachine(32);
+  // maker.fillCoffeeBeans(32);  => 사용할 수 없다.
   maker.makeCoffee(2);
 }
