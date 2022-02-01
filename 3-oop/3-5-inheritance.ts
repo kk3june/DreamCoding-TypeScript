@@ -63,9 +63,17 @@
   // 내용은 CoffeeMachine와 동일, 우유만 추가
   // 상속을 받으려면 부모가 되는 클래스의 생성자를 public 혹은 protected로 수정해야 한다.
   class CafeLatteMachine extends CoffeeMachine {
+    // 자식 클래스에서만 사용할 함수
+    private steamMilk(): void {
+      console.log('Steaming some milk...🥛');
+    }
+
+    // OverWriting
     makeCoffee(shots: number): CoffeeCup {
+      const coffee = super.makeCoffee(shots);
+      this.steamMilk();
       return {
-        shots,
+        ...coffee,
         hasMilk: true,
       };
     }
