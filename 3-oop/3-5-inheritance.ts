@@ -62,7 +62,14 @@
   // 카페라떼 머신 추가
   // 내용은 CoffeeMachine와 동일, 우유만 추가
   // 상속을 받으려면 부모가 되는 클래스의 생성자를 public 혹은 protected로 수정해야 한다.
-  class CafeLatteMachine extends CoffeeMachine {}
+  class CafeLatteMachine extends CoffeeMachine {
+    makeCoffee(shots: number): CoffeeCup {
+      return {
+        shots,
+        hasMilk: true,
+      };
+    }
+  }
 
   // latteMachine 은 CoffeeMachine 을 상속한 CaffeLatteMachine을 상속 받았으므로 CoffeeMachine 의 모든 함수가 사용 가능하다.
   const machine = new CoffeeMachine(23);
