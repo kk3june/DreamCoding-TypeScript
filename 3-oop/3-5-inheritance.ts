@@ -63,6 +63,12 @@
   // 내용은 CoffeeMachine와 동일, 우유만 추가
   // 상속을 받으려면 부모가 되는 클래스의 생성자를 public 혹은 protected로 수정해야 한다.
   class CafeLatteMachine extends CoffeeMachine {
+    constructor(beans: number, readonly serialNumber: string) {
+      // 추가적으로 어떤 데이터를 받아올 때는 공통적으로 부모 클래스에서 필요한 데이터도 받아오고
+      // super를 통해 전달해주어야 한다.
+      super(beans);
+    }
+
     // 자식 클래스에서만 사용할 함수
     private steamMilk(): void {
       console.log('Steaming some milk...🥛');
@@ -81,7 +87,8 @@
 
   // latteMachine 은 CoffeeMachine 을 상속한 CaffeLatteMachine을 상속 받았으므로 CoffeeMachine 의 모든 함수가 사용 가능하다.
   const machine = new CoffeeMachine(23);
-  const latteMachine = new CafeLatteMachine(23);
+  // latteMachine 에만 serialNumber에 접근할 수 있다.
+  const latteMachine = new CafeLatteMachine(23, 'SSS');
 
   const coffee = latteMachine.makeCoffee(1);
   console.log(coffee); //
