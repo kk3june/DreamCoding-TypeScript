@@ -1,4 +1,4 @@
-// # 3-6-polymorphism.ts 
+// # 3-6-polymorphism.ts
 {
   type CoffeeCup = {
     shots: number;
@@ -23,12 +23,12 @@
     }
 
     clean() {
-      console.log("cleaning the machine...");
+      console.log('cleaning the machine...');
     }
 
     fillCoffeeBeans(beans: number) {
       if (beans < 0) {
-        throw new Error("value for beans should be greater than 0");
+        throw new Error('value for beans should be greater than 0');
       }
       this.coffeeBeans += beans;
     }
@@ -36,13 +36,13 @@
     private grindBeans(shots: number) {
       console.log(`grinding beans for ${shots}`);
       if (this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT) {
-        throw new Error("Not enough coffee beans!");
+        throw new Error('Not enough coffee beans!');
       }
       this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT;
     }
 
     private preheat(): void {
-      console.log("heating up... 🔥");
+      console.log('heating up... 🔥');
     }
 
     private extract(shots: number): CoffeeCup {
@@ -65,7 +65,7 @@
       super(beans);
     }
     private steamMilk(): void {
-      console.log("Steaming some milk...🥛");
+      console.log('Steaming some milk...🥛');
     }
 
     makeCoffee(shots: number): CoffeeCup {
@@ -92,12 +92,17 @@
   // 카페라떼머신, 스윗커피메이커는 커피머신을 상속한 클래스
   // => 다형성을 이용하면 한 가지의 클래스나 한 가지의 인터페이스를 통해서 다른 방식으로 구현한 클래스를 만들 수 있다.
 
+  // class SweetCaffeLatteMachine extends SweetCoffeeMaker, CaffeeLatteMachine {
+  //   // 😈  에러발생
+  // 	// 타입스크립트에서는 한 가지 이상의 부모 클래스를 상속할 수 가 없다. => Composition이 필요한 이유
+  // }
+
   const machines = [
     new CoffeeMachine(16),
-    new CaffeLatteMachine(16, "1"),
+    new CaffeLatteMachine(16, '1'),
     new SweetCoffeeMaker(16),
     new CoffeeMachine(16),
-    new CaffeLatteMachine(16, "1"),
+    new CaffeLatteMachine(16, '1'),
     new CoffeeMachine(16),
   ];
   // 배열에 만든 모든 커피머신을 빙글빙글 돌면서 커피를 만든걸 확인해볼 수 있다.
@@ -105,7 +110,7 @@
   // 동일한 부모 클래스를 상속했을 때
   // 동일한 함수를 어떤 클래스인지 구분하지 않고 공통된 api를 호출할 수 있다.
   machines.forEach((machine) => {
-    console.log("--------------");
+    console.log('--------------');
     machine.makeCoffee(1);
     // 여기서 machine 은 커피머신의 배열로 모든 pulbic들의 호출이 가능하다.
   });
