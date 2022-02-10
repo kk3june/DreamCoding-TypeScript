@@ -151,26 +151,13 @@
   // 즉 항상 이 2가지 컴포지션을 사용해야 하며 다른 설탕 제조기를 만들었을 때 이 모든 클래스가 업데이트 되어야 하고 클래스들은 해당 컴포지션만 사용할 수 있도로 스스로를 제약하고 있다.
   // 이것을 다음 강의에서 개선할 것
 
-  const machines: CoffeeMaker[] = [
-    new CoffeeMachine(16),
-    new CaffeLatteMachine(16, '1'),
-    new SweetCoffeeMaker(16),
-    new CoffeeMachine(16),
-    new CaffeLatteMachine(16, '1'),
-    new CoffeeMachine(16),
-  ];
-
-  machines.forEach((machine) => {
-    console.log('--------------');
-    machine.makeCoffee(1);
-  });
-  // 배열에 만든 모든 커피머신을 빙글빙글 돌면서 커피를 만든걸 확인해볼 수 있다.
-  // ✅ 다형성의 장점: 내부적으로 구현된 다양한 클래스들이 한가지 인터페이스를 구현하거나
-  // 동일한 부모 클래스를 상속했을 때
-  // 동일한 함수를 어떤 클래스인지 구분하지 않고 공통된 api를 호출할 수 있다.
-  machines.forEach((machine) => {
-    console.log('--------------');
-    machine.makeCoffee(1);
-    // 여기서 machine 은 커피머신의 배열로 모든 pulbic들의 호출이 가능하다.
-  });
+  const cheapMilkMaker = new CheapMilkSteamer();
+  const candySugar = new AutomaticSugarMixer();
+  const sweetMachine = new SweetCoffeeMaker(12, candySugar);
+  const latteMachine = new CaffeLatteMachine(12, 'SS', cheapMilkMaker);
+  const sweetLatteMachine = new SweetCaffeLatteMachine(
+    12,
+    cheapMilkMaker,
+    candySugar
+  );
 }
