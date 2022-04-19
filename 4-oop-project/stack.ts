@@ -13,11 +13,16 @@ class StackImpl implements Stack {
   private _size: number = 0;
   private head?: StackNode;
 
+  constructor(private capacity: number) {}
+
   get size() {
     return this._size;
   }
 
   push(value: string) {
+    if (this.size === this.capacity) {
+      throw new Error('Stack is full!');
+    }
     const node: StackNode = {
       value,
       next: this.head,
