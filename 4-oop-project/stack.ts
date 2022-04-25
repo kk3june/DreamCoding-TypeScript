@@ -13,12 +13,17 @@
   class StackImpl implements Stack {
     private _size: number = 0; // 내부에서만 쓰이는 변수
     private head?: StackNode;
+
+    constructor(private capacity: number) {} // 얼마만큼의 size를 허용할 건지 inital value 설정 }
     get size() {
       // pubilc size 변수
       return this._size;
     }
 
     push(value: string) {
+      if (this.size === this.capacity) {
+        throw new Error("Stack is full!");
+      }
       this._size++;
       const node: StackNode = { value, next: this.head };
       this.head = node;
@@ -37,7 +42,7 @@
     }
   }
 
-  const stack = new StackImpl();
+  const stack = new StackImpl(10);
   stack.push("Jun");
   stack.push("3jun");
   stack.push("push 2");
