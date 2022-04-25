@@ -23,6 +23,7 @@
     return employee;
   }
 
+  // Good, Employee 인터페이스를 확장한 제네릭만 가능하다.
   function pay<T extends Employee>(employee: T): T {
     employee.pay();
     return employee;
