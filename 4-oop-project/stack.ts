@@ -1,57 +1,53 @@
-interface Stack {
-  readonly size: number;
-  push(value: string): void;
-  pop(): string;
-}
-
-type StackNode = {
-  readonly value: string;
-  readonly next?: StackNode;
-};
-
-class StackImpl implements Stack {
-  private _size: number = 0;
-  private head?: StackNode;
-
-  constructor(private capacity: number) {}
-
-  get size() {
-    return this._size;
+{
+  interface Stack {
+    readonly size: number;
+    push(value: string): void;
+    pop(): string;
   }
 
-  push(value: string) {
-    if (this.size === this.capacity) {
-      throw new Error('Stack is full!');
+  type StackNode = {
+    readonly value: string;
+    readonly next?: StackNode;
+  };
+
+  class StackImpl implements Stack {
+    private _size: number = 0; // 내부에서만 쓰이는 변수
+    private head?: StackNode;
+
+    constructor(private capacity: number) {} // 얼마만큼의 size를 허용할 건지 inital value 설정 }
+    get size() {
+      // pubilc size 변수
+      return this._size;
     }
-    const node: StackNode = {
-      value,
-      next: this.head,
-    };
-    this.head = node;
-    this._size++;
-  }
 
-  pop(): string {
-    // 위에서 head는 ?, 옵셔널이다. 즉 StackNode 일수도 undefined 일 수도 있다.
-    // 하지만 this.head === undefined => 위험하다.
-    // 자바스크립트와 연동할 경우 변수에 null 또는 undefined 를 할당 받는 경우도 있기 때문
-    // 타입스크립트에서는 strict null check 옵션을 주어 이런 문제를 예방할 수 있다.
-    if (this.head == null) {
-      // null == undefined, null !== undefined
-      throw new Error('Stack is empty!');
+    push(value: string) {
+      if (this.size === this.capacity) {
+        throw new Error("Stack is full!");
+      }
+      this._size++;
+      const node: StackNode = { value, next: this.head };
+      this.head = node;
     }
-    const node = this.head;
-    this.head = node.next;
-    this._size--;
-    return node.value;
+    pop(): string {
+      if (this.head == null) {
+        // StackNode 타입을 확인하면 여기서 정확하게는 null 체크가 아니라 undefined 체크를 해야..
+        // 여기는 strict null check, but 자바스크립트 코드와 연동할때는 head 가 null 혹은 undefined 일수도 있다.
+        // null 체크는 null, undefined 일 때 모두 체크 가능
+        throw new Error("Stack is empty!");
+      }
+      const node = this.head;
+      this.head = node.next;
+      this._size--;
+      return node.value;
+    }
   }
-}
 
-const stack = new StackImpl();
-stack.push('Ellie 1');
-stack.push('Bob 2');
-stack.push('Stece 3');
+  const stack = new StackImpl(10);
+  stack.push("Jun");
+  stack.push("3jun");
+  stack.push("push 2");
 
-while (stack.size !== 0) {
-  console.log(stack.pop());
+  while (stack.size !== 0) {
+    console.log(stack.pop());
+  }
 }
