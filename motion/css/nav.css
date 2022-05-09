@@ -1,13 +1,3 @@
-body {
-  width: 100%;
-  height: 100vh;
-}
-
-.section {
-  width: 80%;
-  margin: 0 auto;
-}
-
 .nav {
   position: absolute;
   top: 0;
@@ -16,6 +6,7 @@ body {
   padding: 20px 0;
   background-color: black;
   color: white;
+  overflow: hidden;
 }
 
 .headerTitle {
