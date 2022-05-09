@@ -6,6 +6,7 @@
 
 .contentItem {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   margin: 0 auto;
   border: 1px solid black;
@@ -42,4 +43,10 @@ label {
   display: inline-block;
   height: 20px;
   line-height: 20px;
+}
+
+.contentItem i {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
 }
