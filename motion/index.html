@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
     <link href="./css/styles.css" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/7b2a51515c.js"  defer></script>
+    <script src="https://kit.fontawesome.com/7b2a51515c.js" defer></script>
+    <script type="module" src="./dist/app.js" defer></script>
     <title>Document</title>
   </head>
   <body>
@@ -20,8 +22,8 @@
         </ul>
       </div>
 
-      <div class="content">
-        <div class="contentItem image">
+      <div class="contents">
+        <!-- <div class="contentItem image">
           <img class="img" src="https://picsum.photos/seed/picsum/300/400"></img>
           <div class="innerContent">
             <div class="contentTitle">Where is it</div>
@@ -51,9 +53,11 @@
             <label><input type="checkbox" class="todo">Study</input></label>
           </div>
           <i class="fa fa-times" aria-hidden="true"></i>
-        </div>
+        </div> -->
+        <!-- </div> -->
       </div>
-      <div class="modalDimmed">
+      <div class="modalWrapper">
+        <div class="modalDimmed"></div>
         <form class="addModal">
           <label for="title">Title</label>
           <input type="text" placeholder="insert your title" />
@@ -62,8 +66,8 @@
           <label for="url">Url </label>
           <input type="text" placeholder="input your url" />
           <div class="buttons">
-            <button class="cancel">Cancel</button>
-            <button class="submit">Submit</button>
+            <button type="button">Cancel</button>
+            <button type="submit">Submit</button>
           </div>
         </form>
       </div>
