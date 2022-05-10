@@ -1,6 +1,6 @@
 @import url("./reset.css");
 @import url("./nav.css");
-@import url("./content.css");
+@import url("./contents.css");
 @import url("./addModal.css");
 body {
   width: 100%;
@@ -8,7 +8,6 @@ body {
 }
 
 .section {
-  width: 80%;
   margin: 0 auto;
 }
 
