@@ -7,13 +7,13 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 0 auto;
+  margin: 10px auto;
   border: 1px solid black;
   margin-bottom: 10px;
   overflow: hidden;
 }
 
-.content .contentItem i {
+.contents .contentItem i {
   width: 20px;
   height: 20px;
 }
