@@ -3,7 +3,7 @@ export class ImageComponent {
   constructor(contentTitle: string, contentDesc: string, url: string) {
     const template = document.createElement("template");
     template.innerHTML = `<div class="contentItem image">
-    <img class="img" src="https://picsum.photos/seed/picsum/300/400"></img>
+    <img class="img" src=""></img>
     <div class="innerContent">
       <div class="contentTitle"></div>
       <div class="contentDesc"></div>
