@@ -1,5 +1,5 @@
-import { ImageComponent } from "./components/page/item/image.js";
-import { PageComponent } from "./components/page/page.js";
+import { ImageComponent } from './components/page/item/image.js';
+import { PageComponent } from './components/page/page.js';
 
 class App {
   private readonly content: PageComponent;
@@ -8,12 +8,12 @@ class App {
     this.content.attachTo(appRoot);
 
     const image = new ImageComponent(
-      "ImageTitle",
-      "This is test image component",
-      "https://picsum.photos/400/300"
+      'ImageTitle',
+      'This is test image component',
+      'https://picsum.photos/400/300'
     );
-    image.attachTo(appRoot, "beforeend");
+    image.attachTo(appRoot, 'beforeend');
   }
 }
 
-new App(document.querySelector(".contents") as HTMLElement);
+new App(document.querySelector('.contents') as HTMLElement);
