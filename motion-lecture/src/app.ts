@@ -1,11 +1,12 @@
 import { TodoComponent } from './components/page/item/todo.js';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
-import { PageComponent } from './components/page/page.js';
 import { VideoComponent } from './components/page/item/video.js';
+import { PageComponent, Composable } from './components/page/page.js';
+import { Component } from './components/component.js';
 
 class App {
-  private readonly page: PageComponent;
+  private readonly page: Component & Composable;
   constructor(appRoot: HTMLElement) {
     this.page = new PageComponent();
     this.page.attachTo(appRoot);
@@ -14,19 +15,23 @@ class App {
       'Image Title',
       'https://picsum.photos/600/300'
     );
-    image.attachTo(appRoot, 'beforeend');
+    // image.attachTo(appRoot, 'beforeend');
+    this.page.addChild(image);
 
     const video = new VideoComponent(
       'Video Title',
       'https://www.youtube.com/embed/8aGhZQkoFbQ'
     );
-    video.attachTo(appRoot, 'beforeend');
+    // video.attachTo(appRoot, 'beforeend');
+    this.page.addChild(video);
 
     const note = new NoteComponent('Note Title', 'Note Body');
-    note.attachTo(appRoot, 'beforeend');
+    // note.attachTo(appRoot, 'beforeend');
+    this.page.addChild(note);
 
     const todo = new TodoComponent('Todo Title', 'Todo Body');
-    todo.attachTo(appRoot, 'beforeend');
+    // todo.attachTo(appRoot, 'beforeend');
+    this.page.addChild(todo);
   }
 }
 

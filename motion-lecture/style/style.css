@@ -7,7 +7,11 @@
   --border-color: #3f3f3f;
   --shadow-color: #202020;
   --document-bg-color: #68686850;
-  --component-bg-gradient: radial-gradient(circle, #646464e6 0%, #363636e6 100%);
+  --component-bg-gradient: radial-gradient(
+    circle,
+    #646464e6 0%,
+    #363636e6 100%
+  );
   --smokywhite: #dddbd8;
   --black: #000000;
   --translucent-black: #00000099;
@@ -85,6 +89,7 @@ body {
   height: 100%;
   background-color: var(--document-bg-color);
   /* Firefox */
+  overflow-y: scroll;
   scrollbar-width: 6px;
   scrollbar-color: var(--bg-accent-color);
   scrollbar-face-color: var(--accent-color);
