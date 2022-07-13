@@ -11,11 +11,13 @@ export class InputDialog
   closeListener?: OnCloseListener;
   submitListener?: OnSubmitListener;
   constructor() {
-    super(`<section class='dialog'>
-            <button class='close'>&times;</button>
-            <div id='dialog__body'></div>
-            <button class='dialog__submit'>ADD</button>
-          </seciton>`);
+    super(`<dialog class="dialog">
+            <div class="dialog__container">
+              <button class="close">&times;</button>
+              <div id="dialog__body"></div>
+              <button class="dialog__submit">ADD</button>
+            </div>
+          </dialog>`);
     const closeBtn = this.element.querySelector('.close')! as HTMLElement;
     // closeBtn.addEventListener('click','');
     closeBtn.onclick = () => {
