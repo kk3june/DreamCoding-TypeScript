@@ -1,6 +1,10 @@
 import { TextSectionInput } from './components/dialog/input/text-input.js';
 import { MediaSectionInput } from './components/dialog/input/media-input.js';
-import { InputDialog } from './components/dialog/dialog.js';
+import {
+  InputDialog,
+  MediaData,
+  TextData,
+} from './components/dialog/dialog.js';
 import { VideoComponent } from './components/page/item/video.js';
 import { TodoComponent } from './components/page/item/todo.js';
 import { NoteComponent } from './components/page/item/note.js';
@@ -12,7 +16,7 @@ import {
 } from './components/page/page.js';
 import { Component } from './components/component.js';
 
-type InputComponentConstructor<T = MediaSectionInput | TextSectionInput> = {
+type InputComponentConstructor<T = (MediaData | TextData) & Component> = {
   new (): T;
 };
 
@@ -44,10 +48,9 @@ class App {
     );
   }
 
-  private bindElementToDialog<T extends MediaSectionInput | TextSectionInput>(
+  private bindElementToDialog<T extends (MediaData | TextData) & Component>(
     selector: string,
     InputComponent: InputComponentConstructor<T>,
-    // makeSection 인자는 callback 함수, input 을 전달해주면 그것을 사용하여 어떤 Component를 만듦 1)
     makeSection: (input: T) => Component
   ) {
     const element = document.querySelector(selector)! as HTMLButtonElement;
@@ -61,7 +64,6 @@ class App {
         dialog.removeFrom(this.dialogRoot);
       });
       dialog.setOnSubmitListener(() => {
-        // 1) makeSection 함수를 호출하면서 전달받은 input을 전달
         const image = makeSection(input);
         this.page.addChild(image);
         dialog.removeFrom(this.dialogRoot);
