@@ -1,12 +1,10 @@
 export interface Component {
   attachTo(parent: HTMLElement, position?: InsertPosition): void;
-  // parent Container 에서 나 자신을 제거할 api
   removeFrom(parent: HTMLElement): void;
+  // attach api를 생성한 다음 BaseComponent에서 구현하고, 이후 page.ts에서 사용
+  attach(component: Component, position?: InsertPosition): void;
 }
 
-/**
- * Encapsulate the HTML element creation
- */
 export class BaseComponent<T extends HTMLElement> implements Component {
   protected readonly element: T;
 
@@ -25,5 +23,10 @@ export class BaseComponent<T extends HTMLElement> implements Component {
       throw new Error('Parent mismatch!');
     }
     parent.removeChild(this.element);
+  }
+
+  // attach 함수는 전달받은 컴포넌트를 자기 자신(this.element)에게 붙일 것
+  attach(component: Component, position?: InsertPosition) {
+    component.attachTo(this.element, position);
   }
 }
