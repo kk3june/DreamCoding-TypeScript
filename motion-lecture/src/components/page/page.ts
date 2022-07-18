@@ -1,3 +1,10 @@
+import { Hoverable, Droppable } from './../common/type';
+import {
+  EnableDragging,
+  EnableDrop,
+  EnableHover,
+} from '../../decorators/draggable.js';
+import { Draggable } from '../common/type.js';
 import { BaseComponent, Component } from './../component.js';
 
 export interface Composable {
@@ -10,7 +17,7 @@ type OnDragStateListener<T extends Component> = (
   state: DragState
 ) => void;
 
-interface SectionContainer extends Component, Composable {
+interface SectionContainer extends Component, Composable, Draggable, Hoverable {
   setOnCloseListener(listener: OnCloseListener): void;
   setOnDragStateListener(listener: OnDragStateListener<SectionContainer>): void;
   muteChildren(state: 'mute' | 'unmute'): void;
@@ -22,6 +29,8 @@ type SectionContainerConstructor = {
   new (): SectionContainer;
 };
 
+@EnableDragging
+@EnableHover
 export class PageItemComponent
   extends BaseComponent<HTMLElement>
   implements SectionContainer
@@ -40,18 +49,6 @@ export class PageItemComponent
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener();
     };
-    this.element.addEventListener('dragstart', (event: DragEvent) => {
-      this.onDragStart(event);
-    });
-    this.element.addEventListener('dragend', (event: DragEvent) => {
-      this.onDragEnd(event);
-    });
-    this.element.addEventListener('dragenter', (event: DragEvent) => {
-      this.onDragEnter(event);
-    });
-    this.element.addEventListener('dragleave', (event: DragEvent) => {
-      this.onDragLeave(event);
-    });
   }
   onDragStart(_: DragEvent) {
     this.notifyDragObservers('start');
@@ -104,9 +101,10 @@ export class PageItemComponent
   }
 }
 
+@EnableDrop
 export class PageComponent
   extends BaseComponent<HTMLUListElement>
-  implements Composable
+  implements Composable, Droppable
 {
   private children = new Set<SectionContainer>();
   private dragTarget?: SectionContainer;
@@ -114,22 +112,9 @@ export class PageComponent
 
   constructor(private pageItemConstructor: SectionContainerConstructor) {
     super('<ul class="page"></ul>');
-    this.element.addEventListener('dragover', (event: DragEvent) => {
-      this.onDragOver(event);
-    });
-    this.element.addEventListener('drop', (event: DragEvent) => {
-      this.onDrop(event);
-    });
   }
-
-  onDragOver(event: DragEvent) {
-    event.preventDefault();
-    console.log('onDragOver');
-  }
+  onDragOver(_: DragEvent): void {}
   onDrop(event: DragEvent) {
-    console.log('onDrop', this.dropTarget);
-
-    event.preventDefault();
     if (!this.dropTarget) {
       return;
     }
